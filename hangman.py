@@ -1,11 +1,15 @@
 import random
-import requests
+import json
 
-# API request to get a random word
-word = requests.get("https://random-word-api.herokuapp.com/word")
+# Connection to the Json File
+with open("/Users/samue/Documents/hangman/hangman_game/data.json", "r") as f:
+    data = json.load(f)
+
+# Select a random word from the "words" dictionary in the json file
+word_ran = data["words"][random.randrange(0,726)]
 
 # Variables used for the game logic
-key = list(word.json()[0])
+key = list(word_ran.lower())
 wrongAnswers = 0
 rightAnswers = len(key)
 
@@ -22,10 +26,9 @@ while wrongAnswers < 6 and rightAnswers != 0:
     playerInput = input("Please enter a letter and press enter. ")
     playerInput.lower()
     if playerInput in key:
-        for letter in key:
-            if playerInput == letter:
-                inputIndex = letter.index(playerInput)
-                legend[inputIndex] = playerInput
+        for i, string in enumerate(key):
+            if string == playerInput:
+                legend[i] = key[i]
                 print(legend)
                 rightAnswers -= 1
             else:
@@ -35,7 +38,7 @@ while wrongAnswers < 6 and rightAnswers != 0:
         print("That letter is not in the word")
         print(legend)
 
-
+# When the while loop breaks one of these resolution messages with print to tell the user if they won or lost. 
 if wrongAnswers == 6:
     print("You lose.")
 elif rightAnswers == 0:
