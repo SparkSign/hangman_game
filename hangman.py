@@ -19,7 +19,6 @@ for x in key:
     legend.append("_")
 
 print(legend)
-print(key)
 
 # Game logic - takes letter input from user and compares it to the answer key. If the letter is in the answer key it will replace the dash in the legend at the same index, and increment the rightAnswers down by 1. If it is not in the key it will increase the wrongAnswers variable by 1. After each check, whether right or wrong, it will propt the user to put in another letter. If the rightAnswers variable reaches zero, print out the statement "You Win!". If the wrongAnswers variable reaches 6, print out "You lose."
 while wrongAnswers < 6 and rightAnswers != 0:
@@ -40,7 +39,7 @@ while wrongAnswers < 6 and rightAnswers != 0:
 
 # When the while loop breaks one of these resolution messages with print to tell the user if they won or lost. 
 if wrongAnswers == 6:
-    print("You lose.")
+    print("You lose. The correct word was " + word_ran.lower())
 elif rightAnswers == 0:
     print("You Win!")
 else:
